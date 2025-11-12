@@ -51,7 +51,9 @@ jobs:
       - name: Desplegar aplicación
         run: bash scripts/deploy_app.sh
 
-        run: 
-         chmod: +x scripts/deploy_app.sh
-         bash: scripts/deploy_app.sh
+      - name: Dar permisos y desplegar aplicación
+        run: |
+        chmod: +x scripts/deploy_app.sh
+        bash : scripts/deploy_app.sh
+
 
