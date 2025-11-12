@@ -28,13 +28,25 @@ jobs:
       - name: Generar build
         run: bash scripts/build_app.sh
 
+      - name: Subir build como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build/
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v4
+      - name: Descargar artefacto del build
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: build
+
+      - name: Mostrar contenido descargado
+        run: ls -R build
 
       - name: Desplegar aplicación
         run: bash scripts/deploy_app.sh
