@@ -49,4 +49,9 @@ jobs:
         run: ls -R build
 
       - name: Desplegar aplicación
-        run: bash deploy_app.sh
+        run: bash scripts/deploy_app.sh
+
+        run: |
+         chmod: +x scripts/deploy_app.sh
+         bash: scripts/deploy_app.sh
+
