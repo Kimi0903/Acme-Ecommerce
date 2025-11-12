@@ -39,6 +39,9 @@ jobs:
     needs: build
 
     steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
       - name: Descargar artefacto del build
         uses: actions/download-artifact@v4
         with:
@@ -48,12 +51,7 @@ jobs:
       - name: Mostrar contenido descargado
         run: ls -R build
 
-      - name: Desplegar aplicación
-        run: bash scripts/deploy_app.sh
-
       - name: Dar permisos y desplegar aplicación
         run: |
-        chmod: +x scripts/deploy_app.sh
-        bash : scripts/deploy_app.sh
-
-
+          chmod +x scripts/deploy_app.sh
+          bash scripts/deploy_app.sh
