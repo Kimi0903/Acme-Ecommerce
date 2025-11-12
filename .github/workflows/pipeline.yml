@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,6 +27,14 @@ jobs:
 
       - name: Generar build
         run: bash scripts/build_app.sh
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
 
       - name: Desplegar aplicación
         run: bash scripts/deploy_app.sh
