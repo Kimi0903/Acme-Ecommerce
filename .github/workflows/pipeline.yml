@@ -1,0 +1,32 @@
+name: Acme Ecommerce CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Configurar entorno
+        run: bash scripts/setup_env.sh
+
+      - name: Ejecutar pruebas
+        run: bash scripts/run_tests.sh
+
+      - name: Generar build
+        run: bash scripts/build_app.sh
+
+      - name: Desplegar aplicación
+        run: bash scripts/deploy_app.sh
